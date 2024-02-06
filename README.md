@@ -1,58 +1,79 @@
-# Memory_Card_Game
-Memory Card Game for Project 1 at General Assembly SEI-2023
+# Explore RI - Fullstack MERN App
 
-## Date: 12.06.2023
+Travel Guide for the State of Rhode Island for Capstone Project at General Assembly SEI-2023
+
+## Date: 2.06.2024
 
 ### By: Joshua Wynn
 
 [LinkedIn](https://www.linkedin.com/in/wynnjoshua/) | [GitHub](https://github.com/joshuawynn?tab=repositories)
+
 ***
+
 #### Description
-Created a Memory Card with 6 sets of matching images. 
 
-Instructions: Match 6 sets of cards to win the game. 
+ExploreRI, a full-stack MERN application, is your guide to Rhode Island, offering insights into top destinations and local gems. It provides personalized recommendations, user reviews, and the latest information for tourists and locals alike.
+
+Instructions: Admin creates Destinations, Activies, and Restaurants that users can rate and review. 
 ***
 
-Technologies
-- HTML
-- Javascript
-- CSS
+#### Technologies
+
+- MongoDB
+- Express
+- React
+- Node
+- VS Code
+- Heroku
+- Postman
+- APIs
+- WARP
 
 ***
 
-Game URL
+#### **_Getting Started_**
 
-[Play Game](https://waggish-snakes.surge.sh/)
+Add Getting Started Data to recreate app.
+Add Getting Started Data to use the app.
 
-_Screenshots_
+[Trello Board](https://trello.com/b/DurbBYev/project-3-django-pythons) | [Excalidraw Wireframe](https://excalidraw.com/#room=45816e60f6079d100865,Wi9Qi9ycPFkIFRopB_lqiw) | [ERD](https://lucid.app/lucidchart/5d5f61f7-6b98-4121-868d-3ba6d4fec508/edit?beaconFlowId=013B9B06D1831217&invitationId=inv_81c976ad-d717-41ac-af46-667689c87ecf&page=0_0#) 
+
+***
+
+#### _Launched Site URL_
+
+[Give it a Try!](TBD for Heroku Deployment)
+
+#### _Screenshots_
 
 Welcome Page
 
-![Screenshot 2023-12-05 at 11 26 23 AM](https://github.com/joshuawynn/Memory_Card_Game/assets/8561747/5c1700af-512c-4a76-89e4-8e5eaafa7ba8)
-
+![TBD](TBD)
 
 Game Page
 
-![Screenshot 2023-12-06 at 9 20 07 AM](https://github.com/joshuawynn/Memory_Card_Game/assets/8561747/5dd82c87-eb3b-4d64-bcd7-3517cd79de16)
+![TBD](TBD)
 
- 
  ***
 
- Future Updates
+ #### _Post MVP_
 
- - [ ] Leaderboard
+ - [ ] ChatGpt description generator
+ - [ ] Yelp review API connector
+ - [ ] Zapier zap workflow to trigger review to Yelp
 
-
-_Credits_
+***
+ 
+#### _Credits_
 
 Images: 
 
-[Sharif Muhammad](https://www.sharifmuhammad.com/) | [Pexels](https://www.pexels.com/) |[Mary Mark](https://www.marysmark.com/by-land/Brooklyn-bridge) | [Edouard Dognin](https://unsplash.com/photos/brown-brick-block-wallpaper-H6PaJwYMfUU)
+[TBD](TBD) | [TBD](TBD) |[TBD](TBD) | [TBD](TBD)
 
 Sounds: 
 
-[Pixabay](https://pixabay.com/sound-effects/search/crowd/) | [Andre 3000: Blue Sun](https://www.youtube.com/watch?v=H_tJNVc07Jc&list=PL4yCboer6_xQjnIj0i9U8SsMi8bBqil_J)
+[TBD](TBD) | [TBD](TBD)
 
-Markdown Guide: [ia.net](https://ia.net/)
+Markdown Guide: [TBD](TBD)
 
-Markdown Cheatsheet: [GitHub](https://github.com/)
+Markdown Cheatsheet: [TBD](TBD)
