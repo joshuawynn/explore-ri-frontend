@@ -1,60 +1,70 @@
-import './App.css'
-import Header from './components/Header'
-import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import Restaurants from './components/Restaurants.jsx'
-import Destinations from './components/Destinations.jsx'
-import Activities from './components/Activity.jsx'
-import Client from './services/api.js'
+import './App.css';
+import Header from './components/Header';
+import { useState, useEffect, createContext, useContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Restaurants from './components/Restaurants';
+import Destinations from './components/Destinations';
+import Activities from './components/Activities';
+import Login from './components/Login'; // Assuming you have a Login component
+import Client from './services/api';
+
+// Create a User Context
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState(null);
 
-  const [restaurants, setRestaurant] = useState([])
-  const [destinations, setDestination] = useState([])
-  const [activities, setActivity] = useState([])
-
-  const getRestaurant = async () => {
-    let res = await Client.get('/todo/restaurants')
-    setRestaurant(res.data)
-    console.log(res.data)
-  }
-
-  const getDestination = async () => {
-    let res = await Client.get('/destinations')
-    setDestination(res.data)
-    console.log(res.data)
-  }
-
-  const getActivity = async () => {
-    let res = await Client.get('/activities')
-    setActivity(res.data)
-    console.log(res.data)
-  }
+  // Dummy function for user authentication - replace with your actual login logic
+  const loginUser = async () => {
+    try {
+      // Replace this with your actual login logic
+      const userData = await Client.get('/login');
+      setUser(userData.data);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
   useEffect(() => {
-    getRestaurant();
-    getDestination();
-    getActivity();
-  }, [])
+    // Check if user is logged in on app start, update 'user' state accordingly
+    // Replace this with your actual check login logic
+    const checkLoginStatus = async () => {
+      try {
+        const userData = await Client.get('/current-user');
+        setUser(userData.data);
+      } catch (error) {
+        console.error('Failed to check login status:', error);
+      }
+    };
 
+    checkLoginStatus();
+  }, []);
 
   return (
-    <div>
-      < Header />
-      <main>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/restaurants' element={<Restaurants restaurants={restaurants}/>} />
-          <Route path='/destinations' element={<Destinations destinations={destinations}/>} />
-          <Route path='/activities' element={<Activities activities={activities}/>} />
-        </Routes>
-      </main>
-      <footer>
-        
-      </footer>
-    </div>
-  )
+    <UserContext.Provider value={{ user, loginUser }}>
+      <div>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/restaurants" element={<Restaurants />} />
+            <Route path="/destinations" element={<Destinations />} />
+            <Route path="/activities" element={<Activities />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </main>
+        <footer>
+          {/* Footer content */}
+        </footer>
+      </div>
+    </UserContext.Provider>
+  );
 }
 
-export default App
+// Custom hook to use the UserContext
+export function useUser() {
+  return useContext(UserContext);
+}
+
+export default App;
