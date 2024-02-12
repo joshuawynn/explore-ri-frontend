@@ -8,6 +8,7 @@ import Destinations from './components/Destinations';
 import Activities from './components/Activities';
 import Login from './components/Login'; // Assuming you have a Login component
 import Client from './services/api';
+import Details from './components/Details';
 
 // Create a User Context
 export const UserContext = createContext();
@@ -52,6 +53,7 @@ function App() {
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/activities" element={<Activities />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/:type/:id" element={<Details />} />
           </Routes>
         </main>
         <footer>
