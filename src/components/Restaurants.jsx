@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Make sure to install axios if you haven't
+import Client from '../services/api';
 
 const Restaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -9,7 +9,7 @@ const Restaurants = () => {
         // Function to fetch restaurants
         const fetchRestaurants = async () => {
             try {
-                const response = await axios.get('/todos?category=Restaurant'); // Adjust the URL as needed
+                const response = await Client.get('/todos?category=Restaurant'); // Adjust the URL as needed
                 setRestaurants(response.data); // Assuming the API returns the list of restaurants directly
             } catch (error) {
                 console.error('Error fetching restaurants:', error);
@@ -24,7 +24,7 @@ const Restaurants = () => {
         <div className="restaurant-grid">
             <h1>Restaurants</h1>
             {restaurants.map((restaurant) => (
-                <Link to={`/restaurants/${restaurant._id}`} key={restaurant._id}> {/* Ensure unique key and correct URL */}
+                <Link to={`/restaurants/${restaurant._id}`} key={restaurant._id}> 
                     <div className="restaurant-card">
                         <img src={restaurant.picture} alt={restaurant.name} />
                         <h2>{restaurant.name}</h2>
