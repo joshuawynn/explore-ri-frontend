@@ -1,48 +1,22 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Client from '../services/api';
 
-const Details = ({ user }) => {
-    const { type, id } = useParams();
+const Details = ({user}) => { // type could be 'restaurants', 'activities', or 'destinations'
+    const { type, id  } = useParams();
     const [itemDetails, setItemDetails] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedDetails, setEditedDetails] = useState({});
-    const navigate = useNavigate();
-
+    const [review, setReview] = useState({
+        rating: '5',
+        summary: ''
+    });
+console.log(review)
     const fetchDetails = async () => {
         try {
             let response = await Client.get(`/todos/${id}/?category=${type}`);
             setItemDetails(response.data);
-            setEditedDetails(response.data); // Initialize editable details
+            console.log(response.data)
         } catch (error) {
             console.error(`Error fetching ${type} details:`, error);
-        }
-    };
-
-    const handleEditChange = (e) => {
-        setEditedDetails({ ...editedDetails, [e.target.name]: e.target.value });
-    };
-
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
-    };
-
-    const handleUpdate = async () => {
-        try {
-            await Client.put(`/todos/${id}`, editedDetails);
-            setIsEditing(false);
-            fetchDetails(); // Refresh the details to show updated data
-        } catch (error) {
-            console.error("Error updating Todo:", error);
-        }
-    };
-
-    const handleDelete = async () => {
-        try {
-            await Client.delete(`/todos/${id}`);
-            navigate('/'); // Redirect to home or list page after deletion
-        } catch (error) {
-            console.error("Error deleting Todo:", error);
         }
     };
 
@@ -68,25 +42,38 @@ const Details = ({ user }) => {
 
     useEffect(() => {
         fetchDetails();
+        console.log(user)
     }, [id, type]);
+
+
 
     return itemDetails ? (
         <div className='details-container'>
-            {isEditing ? (
-                <div className='edit-details-form'>
-                    <input type="text" name="name" value={editedDetails.name} onChange={handleEditChange} />
-                    <input type="text" name="picuture" value={editedDetails.picture} onChange={handleEditChange} />
-                    <textarea name="description" value={editedDetails.description} onChange={handleEditChange}></textarea>
-                    <button onClick={handleUpdate}>Save</button>
-                    <button onClick={toggleEdit}>Cancel</button>
+            {/* Dynamic content rendering based on the type */}
+            <div className='item-details'>
+                <img src={itemDetails.picture} alt={itemDetails.title || itemDetails.name}/>
+                <div className='item-data'>
+                    {/* Conditional rendering based on type */}
+                    {type === 'activities' && (
+                        <div>
+                            {/* Specific activity details */}
+                        </div>
+                    )}
+                    {type === 'restaurants' && (
+                        <div>
+                            {/* Specific restaurant details */}
+                        </div>
+                    )}
+                     {type === 'destinations' && (
+                        <div>
+                            {/* Specific destination details */}
+                        </div>
+                    )}
+                    {/* Common details and reviews */}
                 </div>
-            ) : (
-                <div className='item-details'>
-                    <img src={itemDetails.picture} alt={itemDetails.title || itemDetails.name}/>
-                    <button onClick={toggleEdit}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
-                </div>
-            )}
+                <h2>{itemDetails.title || itemDetails.name}</h2>
+                <p>{itemDetails.description}</p>
+            </div>
 
             <div className='reviews-container'>
                 <h3>Reviews</h3>
