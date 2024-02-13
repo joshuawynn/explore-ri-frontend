@@ -1,15 +1,25 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../App'; // Adjust the import path as needed
 
-const Header = () => {
-    const { user, loginUser } = useContext(UserContext); // Assume loginUser can also handle logout
-
-    const handleLogout = () => {
-        // Call a function to handle logout. This might set the user state to null.
-        // You might need to adjust loginUser or create a separate function for logout.
-        loginUser(null);
-    };
+const Header = ({ user, handleLogOut }) => {
+    let userOptions
+    if (user) {
+      userOptions = (
+        <nav>
+          <h3>Welcome {user.email}!</h3>
+          <Link to="/feed">Feed</Link>
+          <Link onClick={handleLogOut} to="/">
+            Sign Out
+          </Link>
+        </nav>
+      )
+    }
+  
+    const publicOptions = (
+      <nav className='navbar'>
+        <Link to="/register"><h4>Register</h4></Link>
+        <Link to="/signin"><h4>Sign In</h4></Link>
+      </nav>
+    )
 
     return (
         <header className="navbar">
@@ -18,11 +28,13 @@ const Header = () => {
             <Link to="/destinations"><h4>Destinations</h4></Link>
             <Link to="/activities"><h4>Activities</h4></Link>
 
-            {user ? (
+            {user ? userOptions : publicOptions}
+
+            {/* {user ? (
                 <h4 onClick={handleLogout} style={{cursor: 'pointer'}}>Logout</h4> // Make "Logout" clickable
             ) : (
                 <Link to="/login"><h4>Login</h4></Link>
-            )}
+            )} */}
         </header>
     );
 };

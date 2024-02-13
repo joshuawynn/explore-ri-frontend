@@ -2,18 +2,19 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Client from '../services/api';
 
-const Details = () => { // type could be 'restaurants', 'activities', or 'destinations'
+const Details = ({user}) => { // type could be 'restaurants', 'activities', or 'destinations'
     const { type, id  } = useParams();
     const [itemDetails, setItemDetails] = useState(null);
     const [review, setReview] = useState({
         rating: '5',
-        content: ''
+        summary: ''
     });
-
+console.log(review)
     const fetchDetails = async () => {
         try {
             let response = await Client.get(`/todos/${id}/?category=${type}`);
             setItemDetails(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error(`Error fetching ${type} details:`, error);
         }
@@ -34,14 +35,17 @@ const Details = () => { // type could be 'restaurants', 'activities', or 'destin
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         addReview();
     };
 
     useEffect(() => {
         fetchDetails();
+        console.log(user)
     }, [id, type]);
+
+
 
     return itemDetails ? (
         <div className='details-container'>
@@ -70,8 +74,33 @@ const Details = () => { // type could be 'restaurants', 'activities', or 'destin
                 <h2>{itemDetails.title || itemDetails.name}</h2>
                 <p>{itemDetails.description}</p>
             </div>
+
             <div className='reviews-container'>
-                {/* Reviews section (common to all types) */}
+                <h3>Reviews</h3>
+                <br />
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor='rating'>Rating:</label>
+                    <select name="rating" id="rating">
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                    <input type="text" name="summary" id="content" onChange={handleChange} />
+                    <button type='submit'>Post</button>
+                </form>
+                <br />
+                <br />
+                <div className='reviews'>
+                    {itemDetails.reviews.map(review => (
+                        <div>
+                            <p>{review.summary}</p>
+                            <p>rating: {review.rating}</p>
+                            <hr />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     ) : null;

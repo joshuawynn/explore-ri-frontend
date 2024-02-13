@@ -6,67 +6,63 @@ import Home from './components/Home';
 import Restaurants from './components/Restaurants';
 import Destinations from './components/Destinations';
 import Activities from './components/Activities';
-import Login from './components/Login'; // Assuming you have a Login component
 import Client from './services/api';
 import Details from './components/Details';
+import Register from './pages/Register'
+import SignIn from './pages/SignIn'
+import Feed from './pages/Feed'
+import { CheckSession } from './services/Auth';
 
-// Create a User Context
-export const UserContext = createContext();
 
-function App() {
-  const [user, setUser] = useState(null);
+const App = () => {
+  const [user, setUser] = useState(null)
 
-  // Dummy function for user authentication - replace with your actual login logic
-  const loginUser = async () => {
-    try {
-      // Replace this with your actual login logic
-      const userData = await Client.get('/login');
-      setUser(userData.data);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
+  const checkToken = async () => {
+    const user = localStorage.getItem("user") ? localStorage.getItem("user") : ""
+    setUser(user)
+  }
 
   useEffect(() => {
-    // Check if user is logged in on app start, update 'user' state accordingly
-    // Replace this with your actual check login logic
-    const checkLoginStatus = async () => {
-      try {
-        const userData = await Client.get('/current-user');
-        setUser(userData.data);
-      } catch (error) {
-        console.error('Failed to check login status:', error);
-      }
-    };
+    const token = localStorage.getItem('token')
+    // Check if token exists before requesting to validate the token
+    if (token) {
+      checkToken()
+    }
+  }, [])
 
-    checkLoginStatus();
-  }, []);
+
+  const handleLogOut = () => {
+    //Reset all auth related state and clear localStorage
+    setUser(null)
+    localStorage.clear()
+
+
+  }
+
 
   return (
-    <UserContext.Provider value={{ user, loginUser }}>
-      <div>
-        <Header />
+    <div className="App">
+      <Header
+        user={user}
+        handleLogOut={handleLogOut}
+      />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/restaurants" element={<Restaurants />} />
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/activities" element={<Activities />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/:type/:id" element={<Details />} />
+            <Route path="/:type/:id" element={<Details user={user} />} />
+            <Route path="/signin" element={<SignIn setUser={setUser} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/feed" element={<Feed user={user} />} />
           </Routes>
         </main>
         <footer>
           {/* Footer content */}
         </footer>
       </div>
-    </UserContext.Provider>
-  );
-}
-
-// Custom hook to use the UserContext
-export function useUser() {
-  return useContext(UserContext);
+  )
 }
 
 export default App;
