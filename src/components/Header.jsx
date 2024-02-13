@@ -15,9 +15,9 @@ const Header = ({ user, handleLogOut }) => {
     }
   
     const publicOptions = (
-      <nav className='navbar'>
+      <nav className="navbar">
         <Link to="/register"><h4>Register</h4></Link>
-        <Link to="/signin"><h4>Sign In</h4></Link>
+        <Link to="/signin"><h4> Sign In</h4></Link>
       </nav>
     )
 
@@ -27,6 +27,7 @@ const Header = ({ user, handleLogOut }) => {
             <Link to="/restaurants"><h4>Restaurants</h4></Link>
             <Link to="/destinations"><h4>Destinations</h4></Link>
             <Link to="/activities"><h4>Activities</h4></Link>
+            <Link to="/addTodoForm"><h4>Add Todo</h4></Link>
 
             {user ? userOptions : publicOptions}
 

@@ -11,6 +11,7 @@ import Details from './components/Details';
 import Register from './pages/Register'
 import SignIn from './pages/SignIn'
 import Feed from './pages/Feed'
+import AddTodoForm from './components/AddTodoForm';
 import { CheckSession } from './services/Auth';
 
 
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="/signin" element={<SignIn setUser={setUser} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/feed" element={<Feed user={user} />} />
+            <Route path="/addTodoForm" element={<AddTodoForm user={user} />} />
           </Routes>
         </main>
         <footer>
