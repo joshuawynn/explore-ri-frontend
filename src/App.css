@@ -3,13 +3,13 @@
   width: 100vw;
   box-sizing: border-box;
 }
-
+/* 
 header {
   display: flex;
   gap: 32px;
   align-items: center;
   padding: 16px;
-}
+} */
 
 main {
   display: flex;
@@ -39,7 +39,7 @@ img {
   color: rgb(36, 47, 85);
 }
 
-.navbar {
+/* .navbar {
   justify-content: space-between;
   align-items: center;
   color: white;
@@ -47,7 +47,7 @@ img {
   padding: 1em;
   min-height: 2em;
   font-family: 'Georgia';
-}
+} */
 
 .restaurant-grid, .destination-grid, .activity-grid{
   display: flex;

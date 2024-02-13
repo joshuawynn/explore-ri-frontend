@@ -1,65 +1,95 @@
-import { useState } from 'react'
-import { SignInUser } from '../services/Auth'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SignInUser } from '../services/Auth';
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBInput
+} from 'mdb-react-ui-kit';
+import logoImage from '../assets/riLogo.png';
 
-const SignIn = (props) => {
 
-  let navigate = useNavigate()
-  
-  const [formValues, setFormValues] = useState({ email: '', password: '' })
+const SignIn = ({ setUser }) => {
+  const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
-  }
+    const { name, value } = e.target;
+    setFormValues(prevState => ({ ...prevState, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const payload = await SignInUser(formValues)
-    setFormValues({ email: '', password: '' })
-    console.log(payload)
-    
-    // Serialize the payload object to a string and store it in localStorage
-    localStorage.setItem("user", JSON.stringify(payload))
-    
-    // Deserialize the string back to an object when retrieving it
-    const storedUser = JSON.parse(localStorage.getItem("user"))
-    props.setUser(storedUser)
-    
-    navigate('/feed')
-  }
+    e.preventDefault();
+    try {
+      const payload = await SignInUser(formValues);
+      localStorage.setItem('user', JSON.stringify(payload));
+      setUser(payload);
+      navigate('/feed');
+    } catch (error) {
+      console.error('Sign in failed:', error);
+      // Optionally, handle sign-in failure (e.g., show an error message)
+    }
+  };
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleChange}
+    <MDBContainer fluid className="p-3">
+      <MDBRow>
+        <MDBCol md='6' className='mx-auto'>
+
+          <div className='d-flex flex-row justify-content-center mt-4 mb-3'>
+            <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#709085' }}/>
+            {/* <span className="h1 fw-bold">Logo</span> */}
+          </div>
+
+          <h3 className="fw-normal mb-3 text-center" style={{ letterSpacing: '1px' }}>Log in</h3>
+
+          <form onSubmit={handleSubmit}>
+            <MDBInput 
+              wrapperClass='mb-4 w-100' 
+              label='Email address' 
+              id='formControlLgEmail' 
+              type='email' 
+              size="lg"
               name="email"
-              type="email"
-              placeholder="example@example.com"
+              onChange={handleChange}
               value={formValues.email}
               required
             />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleChange}
-              type="password"
+
+            <MDBInput 
+              wrapperClass='mb-4 w-100' 
+              label='Password' 
+              id='formControlLgPassword' 
+              type='password' 
+              size="lg"
               name="password"
+              onChange={handleChange}
               value={formValues.password}
               required
             />
-          </div>
-          <button disabled={!formValues.email || !formValues.password}>
-            Sign In
-          </button>
-        </form>
-      </div>
-    </div>
-  )
-}
 
-export default SignIn
+            <MDBBtn className="mb-4 w-100" color='info' size='lg' type="submit">Login</MDBBtn>
+          </form>
+
+          <p className="text-center">
+            <a className="text-muted" href="#!">Forgot password?</a>
+          </p>
+          <p className='text-center'>
+            Don't have an account? <a href="#!" className="link-info">Register here</a>
+          </p>
+
+        </MDBCol>
+
+        <MDBCol md='6' className='d-none d-md-block px-0'>
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+            alt="Login" className="w-100 vh-100" style={{ objectFit: 'cover', objectPosition: 'left' }} />
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+  );
+};
+
+export default SignIn;

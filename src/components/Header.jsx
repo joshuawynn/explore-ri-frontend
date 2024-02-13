@@ -1,43 +1,68 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import styles from '../NavBar.module.css';
+import logoImage from '../assets/riLogo.png';
+
 
 const Header = ({ user, handleLogOut }) => {
-    let userOptions
-    if (user) {
-      userOptions = (
-        <nav>
-          <h3>Welcome {user.email}!</h3>
-          <Link to="/feed">Feed</Link>
-          <Link onClick={handleLogOut} to="/">
-            Sign Out
-          </Link>
-        </nav>
-      )
-    }
-  
-    const publicOptions = (
-      <nav className="navbar">
-        <Link to="/register"><h4>Register</h4></Link>
-        <Link to="/signin"><h4> Sign In</h4></Link>
-      </nav>
-    )
+  const userOptions = (
+    <Nav>
+      <Nav.Link as={NavLink} to="/feed" className={styles.navLink}>
+        Feed
+      </Nav.Link>
+      <Nav.Link as={NavLink} to="/" onClick={handleLogOut} className={styles.navLink}>
+        Sign Out
+      </Nav.Link>
+    </Nav>
+  );
 
-    return (
-        <header className="navbar">
-            <Link to="/"><h2 className="logo">Explore RI</h2></Link>
-            <Link to="/restaurants"><h4>Restaurants</h4></Link>
-            <Link to="/destinations"><h4>Destinations</h4></Link>
-            <Link to="/activities"><h4>Activities</h4></Link>
-            <Link to="/addTodoForm"><h4>Add Todo</h4></Link>
+  const publicOptions = (
+    <Nav>
+      <Nav.Link as={NavLink} to="/register" className={styles.navLink}>
+        Register
+      </Nav.Link>
+      <Nav.Link as={NavLink} to="/signin" className={styles.navLink}>
+        Sign In
+      </Nav.Link>
+    </Nav>
+  );
 
-            {user ? userOptions : publicOptions}
+  return (
+    <Navbar bg="light" expand="lg" className={`${styles.navbar} d-flex justify-content-center`}>
+      <Container className={`d-flex justify-between ${styles.navbarContainer}`}>
+        <Navbar.Brand as={NavLink} to="/" className={`${styles.navbarBrand} d-flex align-items-center`}>
+       
+          <img
+            src={logoImage}
+            width="100" // Adjust the width as needed
+            height="100" // Adjust the height as needed
+            className="d-inline-block align-top mr-2"
+            alt="Explore RI Logo"
+          />
 
-            {/* {user ? (
-                <h4 onClick={handleLogout} style={{cursor: 'pointer'}}>Logout</h4> // Make "Logout" clickable
-            ) : (
-                <Link to="/login"><h4>Login</h4></Link>
-            )} */}
-        </header>
-    );
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/restaurants" className={styles.navLink}>
+              Restaurants
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/destinations" className={styles.navLink}>
+              Destinations
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/activities" className={styles.navLink}>
+              Activities
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/addTodoForm" className={styles.navLink}>
+              Add Todo
+            </Nav.Link>
+          </Nav>
+          {user ? userOptions : publicOptions}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default Header;

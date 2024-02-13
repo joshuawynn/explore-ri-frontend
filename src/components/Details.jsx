@@ -8,6 +8,10 @@ const Details = ({ user }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedDetails, setEditedDetails] = useState({});
     const navigate = useNavigate();
+    const [review, setReview] = useState({
+        rating: '5',
+        summary: ''
+    });
 
     const fetchDetails = async () => {
         try {

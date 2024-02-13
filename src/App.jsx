@@ -13,6 +13,10 @@ import SignIn from './pages/SignIn'
 import Feed from './pages/Feed'
 import AddTodoForm from './components/AddTodoForm';
 import { CheckSession } from './services/Auth';
+// import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
+
+
+
 
 
 const App = () => {
@@ -42,7 +46,7 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div className="text-3xl font-bold underline">
       <Header
         user={user}
         handleLogOut={handleLogOut}
@@ -61,7 +65,7 @@ const App = () => {
           </Routes>
         </main>
         <footer>
-          {/* Footer content */}
+
         </footer>
       </div>
   )
