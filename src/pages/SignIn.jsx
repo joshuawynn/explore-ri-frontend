@@ -75,17 +75,17 @@ const SignIn = ({ setUser }) => {
           </form>
 
           <p className="text-center">
-            <a className="text-muted" href="#!">Forgot password?</a>
+            <a className="text-muted" href="/forgotPassword">Forgot password?</a>
           </p>
           <p className='text-center'>
-            Don't have an account? <a href="#!" className="link-info">Register here</a>
+            Don't have an account? <a href="/register" className="link-info">Register here</a>
           </p>
 
         </MDBCol>
 
         <MDBCol md='6' className='d-none d-md-block px-0'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
-            alt="Login" className="w-100 vh-100" style={{ objectFit: 'cover', objectPosition: 'left' }} />
+          <img src={logoImage}
+            alt="Login" className="w-100 vh-100" style={{ objectFit: '', objectPosition: 'left' }} />
         </MDBCol>
       </MDBRow>
     </MDBContainer>
@@ -93,3 +93,4 @@ const SignIn = ({ setUser }) => {
 };
 
 export default SignIn;
+

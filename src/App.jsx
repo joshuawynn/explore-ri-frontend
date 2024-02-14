@@ -13,6 +13,7 @@ import SignIn from './pages/SignIn'
 import Feed from './pages/Feed'
 import AddTodoForm from './components/AddTodoForm';
 import { CheckSession } from './services/Auth';
+import ForgotPassword from './pages/ForgotPassword';
 // import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -62,6 +63,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/feed" element={<Feed user={user} />} />
             <Route path="/addTodoForm" element={<AddTodoForm user={user} />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
           </Routes>
         </main>
         <footer>

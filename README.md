@@ -81,3 +81,6 @@ Markdown Cheatsheet: [TBD](TBD)
 
 https://mdbootstrap.com/docs/react/extended/login-form/#section-login-screen-example
 
+<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+
+https://www.airplane.dev/blog/building-a-react-bootstrap-navbar-from-scratch

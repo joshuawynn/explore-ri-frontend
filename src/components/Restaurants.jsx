@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Client from '../services/api';
+import MapContainer from './GoogleMap';
 
 const Restaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -31,6 +32,10 @@ const Restaurants = () => {
                         <div>
                             <p>Description:</p>
                             <p>{restaurant.description}</p>
+                           {/* Integrate the Google Maps component with address prop */}
+                        {restaurant.address && (
+                            <MapContainer address={restaurant.address} />
+                        )}
                         </div>
                     </div>
                 </Link>
