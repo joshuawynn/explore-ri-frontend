@@ -27,7 +27,7 @@ const SignIn = ({ setUser }) => {
       const payload = await SignInUser(formValues);
       localStorage.setItem('user', JSON.stringify(payload));
       setUser(payload);
-      navigate('/feed');
+      navigate('/');
     } catch (error) {
       console.error('Sign in failed:', error);
       // Optionally, handle sign-in failure (e.g., show an error message)

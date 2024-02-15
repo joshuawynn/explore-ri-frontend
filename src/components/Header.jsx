@@ -8,9 +8,9 @@ import logoImage from '../assets/riLogo.png';
 const Header = ({ user, handleLogOut }) => {
   const userOptions = (
     <Nav>
-      <Nav.Link as={NavLink} to="/feed" className={styles.navLink}>
+      {/* <Nav.Link as={NavLink} to="/feed" className={styles.navLink}>
         Feed
-      </Nav.Link>
+      </Nav.Link> */}
       <Nav.Link as={NavLink} to="/" onClick={handleLogOut} className={styles.navLink}>
         Sign Out
       </Nav.Link>

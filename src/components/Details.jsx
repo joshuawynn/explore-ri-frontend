@@ -98,6 +98,12 @@ const Details = ({ user }) => {
                             <Form.Control as="textarea" name="description" value={editedDetails.description} onChange={handleEditChange} />
                         </Col>
                     </Form.Group>
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Address</Form.Label>
+                        <Col sm="10">
+                            <Form.Control as="textarea" name="address" value={editedDetails.address} onChange={handleEditChange} />
+                        </Col>
+                    </Form.Group>
                     <Button variant="primary" type="submit">Save</Button>
                     <Button variant="secondary" onClick={toggleEdit} className="ms-2">Cancel</Button>
                 </Form>
