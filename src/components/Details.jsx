@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Client from '../services/api';
+import { Card, Button, Form, Col, Row, Container } from 'react-bootstrap';
+import MapContainer from './GoogleMap'; // Import the MapContainer component
 
 const Details = ({ user }) => {
     const { type, id } = useParams();
@@ -75,51 +77,79 @@ const Details = ({ user }) => {
     }, [id, type]);
 
     return itemDetails ? (
-        <div className='details-container'>
+        <Container className='details-container mt-4'>
             {isEditing ? (
-                <div className='edit-details-form'>
-                    <input type="text" name="name" value={editedDetails.name} onChange={handleEditChange} />
-                    <input type="text" name="picuture" value={editedDetails.picture} onChange={handleEditChange} />
-                    <textarea name="description" value={editedDetails.description} onChange={handleEditChange}></textarea>
-                    <button onClick={handleUpdate}>Save</button>
-                    <button onClick={toggleEdit}>Cancel</button>
-                </div>
+                <Form onSubmit={handleUpdate}>
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Name</Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" name="name" value={editedDetails.name} onChange={handleEditChange} />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Picture URL</Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" name="picture" value={editedDetails.picture} onChange={handleEditChange} />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Description</Form.Label>
+                        <Col sm="10">
+                            <Form.Control as="textarea" name="description" value={editedDetails.description} onChange={handleEditChange} />
+                        </Col>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Save</Button>
+                    <Button variant="secondary" onClick={toggleEdit} className="ms-2">Cancel</Button>
+                </Form>
             ) : (
-                <div className='item-details'>
-                    <img src={itemDetails.picture} alt={itemDetails.title || itemDetails.name}/>
-                    <button onClick={toggleEdit}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
-                </div>
+                <Card>
+                    <Card.Img variant="top" src={itemDetails.picture} alt={itemDetails.title || itemDetails.name} />
+                    <Card.Body>
+                        <Card.Title>{itemDetails.name}</Card.Title>
+                        <Card.Text>{itemDetails.description}</Card.Text>
+                        <Button variant="warning" onClick={toggleEdit}>Edit</Button>
+                        <Button variant="danger" onClick={handleDelete} className="ms-2">Delete</Button>
+                    </Card.Body>
+                </Card>
             )}
 
-            <div className='reviews-container'>
+            <div className='reviews-container mt-4'>
                 <h3>Reviews</h3>
-                <br />
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor='rating'>Rating:</label>
-                    <select name="rating" id="rating">
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
-                    <input type="text" name="summary" id="content" onChange={handleChange} />
-                    <button type='submit'>Post</button>
-                </form>
-                <br />
-                <br />
-                <div className='reviews'>
-                    {itemDetails.reviews.map(review => (
-                        <div>
-                            <p>{review.summary}</p>
-                            <p>rating: {review.rating}</p>
-                            <hr />
-                        </div>
-                    ))}
-                </div>
+                <Form onSubmit={handleSubmit} className="mt-3">
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Rating</Form.Label>
+                        <Col sm="10">
+                            <Form.Select name="rating" defaultValue="5" onChange={handleChange}>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </Form.Select>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm="2">Summary</Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" name="summary" onChange={handleChange} />
+                        </Col>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Post Review</Button>
+                </Form>
+
+                {itemDetails.reviews && itemDetails.reviews.map((review, index) => (
+                    <Card key={index} className="mt-3">
+                        <Card.Body>
+                            <Card.Text>{review.summary}</Card.Text>
+                            <Card.Text>Rating: {review.rating}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                ))}
             </div>
-        </div>
+            {itemDetails.address && (
+                <MapContainer address={itemDetails.address} />
+            )}
+        </Container>
     ) : null;
 }
 

@@ -8,9 +8,9 @@ import {
 
 const libraries = ['places']; // Enable the Places library for additional features
 
-const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY; // Replace with your actual API key
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY; // Replace with your actual API key
 
-const MapContainer = ({ props }) => {
+const MapContainer = ({ address }) => {
   const [map, setMap] = useState(null);
   const [center, setCenter] = useState({ lat: 40.7128, lng: -74.0060 }); // Default center (New York City)
   const [marker, setMarker] = useState(null);
@@ -26,7 +26,6 @@ const MapContainer = ({ props }) => {
 
   useEffect(() => {
     if (isLoaded) {
-      const address = props.address; // Access address prop passed from Todos component
       geocodeAddress(address)
         .then((coordinates) => {
           setCenter(coordinates);
@@ -35,10 +34,18 @@ const MapContainer = ({ props }) => {
         .catch((error) => {
           console.error('Error geocoding address:', error);
         });
+      }
+    }, [isLoaded, address]);
+    
+    // Geocoding function (you can use a suitable library or API for this)
+    function geocodeAddress(address) {
+      // Implement your geocoding logic here, returning latitude and longitude coordinates
+      // This is a placeholder example using `fetch` for demonstration purposes:
+      return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=<span class="math-inline">\{address\}&key\=</span>{GOOGLE_API_KEY}`)
+        .then((response) => response.json())
+        .then((data) => ({ lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng }));
     }
-  }, [isLoaded, props.address]);
-
-  const mapStyles = {
+    const mapStyles = {
     width: '100%',
     height: '400px',
   };
@@ -69,11 +76,3 @@ const MapContainer = ({ props }) => {
 
 export default MapContainer;
 
-// Geocoding function (you can use a suitable library or API for this)
-function geocodeAddress(address) {
-  // Implement your geocoding logic here, returning latitude and longitude coordinates
-  // This is a placeholder example using `fetch` for demonstration purposes:
-  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=<span class="math-inline">\{address\}&key\=</span>{GOOGLE_API_KEY}`)
-    .then((response) => response.json())
-    .then((data) => ({ lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng }));
-}

@@ -1,3 +1,5 @@
+import { Carousel } from "react-bootstrap";
+
 const Home = () => {
     return (
         <div>

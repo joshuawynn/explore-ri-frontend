@@ -1,40 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Client from '../services/api';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-const Destinations= () => {
+const Destinations = () => {
     const [destinations, setDestinations] = useState([]);
 
     useEffect(() => {
-        // Function to fetch destinations
-        const fetchDestinations= async () => {
+        const fetchDestinations = async () => {
             try {
-                const response = await Client.get('/todos?category=Destination'); 
-                setDestinations(response.data); 
+                const response = await Client.get('/todos?category=Destination');
+                setDestinations(response.data);
             } catch (error) {
                 console.error('Error fetching destinations:', error);
-                // Handle error appropriately
             }
         };
 
         fetchDestinations();
-    }, []); // Empty dependency array means this effect runs once on mount
+    }, []);
 
     return (
         <div className="destination-grid">
-            <h1>Destination</h1>
-            {destinations.map((destination) => (
-                <Link to={`/destinations/${destination._id}`} key={destination._id}> 
-                    <div className="destination-card">
-                        <img src={destination.picture} alt={destination.name} />
-                        <h2>{destination.name}</h2>
-                        <div>
-                            <p>Description:</p>
-                            <p>{destination.description}</p>
-                        </div>
-                    </div>
-                </Link>
-            ))}
+            <h1>Destinations</h1>
+            <Row xs={1} md={2} className="g-4">
+                {destinations.map((destination, idx) => (
+                    <Col key={idx}>
+                        <Card>
+                            <Link to={`/destinations/${destination._id}`}>
+                                <Card.Img variant="top" src={destination.picture} alt={destination.name} />
+                            </Link>
+                            <Card.Body>
+                                <Card.Title>{destination.name}</Card.Title>
+                                <Card.Text>
+                                    {destination.description}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
         </div>
     );
 };

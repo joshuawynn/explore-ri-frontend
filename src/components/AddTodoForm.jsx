@@ -3,10 +3,11 @@ import Client from '../services/api';
 
 function AddTodoForm() {
     const [todo, setTodo] = useState({
-        category: '', // Default type
+        category: 'Restaurant', // Default type
         name: '',
         picture: '',
-        description: ''
+        description: '',
+        address:''
     });
 
     const handleChange = (e) => {
@@ -52,6 +53,10 @@ function AddTodoForm() {
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
                     <textarea className="form-control" id="description" name="description" rows="3" value={todo.description} onChange={handleChange}></textarea>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="address" className="form-label">Address</label>
+                    <textarea className="form-control" id="address" name="address" rows="3" value={todo.address} onChange={handleChange}></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Add Todo</button>
             </form>
