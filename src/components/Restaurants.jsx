@@ -39,10 +39,6 @@ const Restaurants = () => {
                                 <Card.Text>
                                     {restaurant.description}
                                 </Card.Text>
-                                {/* Uncomment and adjust the MapContainer if you need to display maps */}
-                                {/* {restaurant.address && (
-                                    <MapContainer address={restaurant.address} />
-                                )} */}
                             </Card.Body>
                         </Card>
                     </Col>

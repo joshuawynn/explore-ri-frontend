@@ -13,6 +13,7 @@ import providence3 from '../assets/providence3.png';
 import sunset from '../assets/sunset.png';
 import sunset2 from '../assets/sunset2.png';
 
+
 const Home = () => {
     return (
         <div>

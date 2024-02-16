@@ -42,7 +42,7 @@ Add Getting Started Data to use the app.
 
 #### _Launched Site URL_
 
-[Give it a Try!](TBD for Heroku Deployment)
+[Give it a Try!](https://explore-ri-449da439ad11.herokuapp.com/)
 
 #### _Screenshots_
 
@@ -58,6 +58,7 @@ Game Page
 
  #### _Post MVP_
 
+ - [x] Google Maps API integration
  - [ ] ChatGpt description generator
  - [ ] Yelp review API connector
  - [ ] Zapier zap workflow to trigger review to Yelp

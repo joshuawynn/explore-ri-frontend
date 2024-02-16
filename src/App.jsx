@@ -14,7 +14,7 @@ import Feed from './pages/Feed'
 import AddTodoForm from './components/AddTodoForm';
 import { CheckSession } from './services/Auth';
 import ForgotPassword from './pages/ForgotPassword';
-// import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
+
 
 
 
