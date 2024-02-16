@@ -44,21 +44,26 @@ Add Getting Started Data to use the app.
 
 [Give it a Try!](https://explore-ri-449da439ad11.herokuapp.com/)
 
+#### _Backend Repository
+
+[Backend Repository] (https://github.com/joshuawynn/explore-ri-backend)
+
 #### _Screenshots_
+
 
 Welcome Page
 
-![TBD](TBD)
+![WelcomePage](https://github.com/joshuawynn/explore-ri-frontend/assets/8561747/797f0561-4106-45a2-a6ab-306a70afeec0)
 
-Game Page
+Restaurant Page
 
-![TBD](TBD)
+![RestaurantPage](https://github.com/joshuawynn/explore-ri-frontend/assets/8561747/b0ab8205-f69a-4ce8-93ee-46556db348a3)
 
  ***
 
  #### _Post MVP_
 
- - [x] Google Maps API integration
+ - [x] Google Maps API integration 
  - [ ] ChatGpt description generator
  - [ ] Yelp review API connector
  - [ ] Zapier zap workflow to trigger review to Yelp
@@ -69,19 +74,15 @@ Game Page
 
 Images: 
 
-[TBD](TBD) | [TBD](TBD) |[TBD](TBD) | [TBD](TBD)
-
-Sounds: 
-
-[TBD](TBD) | [TBD](TBD)
-
-Markdown Guide: [TBD](TBD)
-
-Markdown Cheatsheet: [TBD](TBD)
+[Brian Lima Photography](https://www.brianlima.com/) | [Visit Rhode Island](https://www.instagram.com/visitrhodeisland/) |[Angel Tucker Photography](https://www.instagram.com/angeltuckerphoto/) 
 
 
-https://mdbootstrap.com/docs/react/extended/login-form/#section-login-screen-example
+Mdbootstrap: [Login Screen](https://mdbootstrap.com/docs/react/extended/login-form/#section-login-screen-example)
 
-<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+Airplane.dev: [Navbar](https://www.airplane.dev/blog/building-a-react-bootstrap-navbar-from-scratch)
 
-https://www.airplane.dev/blog/building-a-react-bootstrap-navbar-from-scratch
+
+
+
+
+
